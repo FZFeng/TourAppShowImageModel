@@ -50,6 +50,15 @@
         
         [returnImageDataMutArray addObject:imageDataMutDictionary2];
         
+        //3
+        NSMutableDictionary *imageDataMutDictionary3=[[NSMutableDictionary alloc] init];
+        //title
+        [imageDataMutDictionary3 setObject:@"中国黄山" forKey:@"title"];
+        //image
+        [imageDataMutDictionary3 setObject:@[@"slide1.jpg",@"slide2.jpg"] forKey:@"image"];
+        
+        [returnImageDataMutArray addObject:imageDataMutDictionary3];
+        
         
     }else if ([tagItemString isEqualToString:@"美食"]){
         
@@ -99,7 +108,7 @@
         //title
         [imageDataMutDictionary1 setObject:@"张家界" forKey:@"title"];
         //image
-        [imageDataMutDictionary1 setObject:@[@"thumb1.jpg",@"thumb2.jpg",@"thumb3.jpg",@"thumb4.jpg",@"thumb5.jpg",@"thumb6.jpg"] forKey:@"image"];
+        [imageDataMutDictionary1 setObject:@[@"thumb1.jpg",@"thumb4.jpg",@"thumb5.jpg",@"thumb6.jpg"] forKey:@"image"];
         
         [returnImageDataMutArray addObject:imageDataMutDictionary1];
         
@@ -108,7 +117,7 @@
         //title
         [imageDataMutDictionary2 setObject:@"森林公园" forKey:@"title"];
         //image
-        [imageDataMutDictionary2 setObject:@[@"thumb1.jpg",@"thumb2.jpg",@"thumb3.jpg"] forKey:@"image"];
+        [imageDataMutDictionary2 setObject:@[@"thumb1.jpg",@"thumb2.jpg",@"thumb3.jpg",@"thumb2.jpg",@"thumb3.jpg"] forKey:@"image"];
         
         [returnImageDataMutArray addObject:imageDataMutDictionary2];
 
@@ -120,7 +129,7 @@
         //title
         [imageDataMutDictionary1 setObject:@"张家界" forKey:@"title"];
         //image
-        [imageDataMutDictionary1 setObject:@[@"thumb1.jpg",@"thumb2.jpg",@"thumb3.jpg",@"thumb4.jpg",@"thumb5.jpg",@"thumb6.jpg"] forKey:@"image"];
+        [imageDataMutDictionary1 setObject:@[@"thumb1.jpg",@"thumb2.jpg",@"thumb3.jpg",@"thumb4.jpg",@"thumb6.jpg"] forKey:@"image"];
         
         [returnImageDataMutArray addObject:imageDataMutDictionary1];
         
@@ -150,7 +159,7 @@
         //title
         [imageDataMutDictionary2 setObject:@"森林公园" forKey:@"title"];
         //image
-        [imageDataMutDictionary2 setObject:@[@"thumb1.jpg",@"thumb2.jpg",@"thumb3.jpg"] forKey:@"image"];
+        [imageDataMutDictionary2 setObject:@[@"thumb1.jpg",@"thumb2.jpg",@"thumb3.jpg",@"thumb4.jpg"] forKey:@"image"];
         
         [returnImageDataMutArray addObject:imageDataMutDictionary2];
 

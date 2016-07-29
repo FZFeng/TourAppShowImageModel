@@ -10,4 +10,10 @@
 
 @interface imageMutLineTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *numLabel;
+    
+@property (weak, nonatomic) IBOutlet UIView *imageListView;
+
+
 @end

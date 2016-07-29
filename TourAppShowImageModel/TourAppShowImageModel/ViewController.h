@@ -8,9 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "ViewModelsBase.h"
-
+#import "ViewControllerImageBrowse.h"
 #import "imageMutLineTableViewCell.h"
-#import "imageSingleLineTableViewCell.h"
 
 @interface ViewController : UIViewController
 

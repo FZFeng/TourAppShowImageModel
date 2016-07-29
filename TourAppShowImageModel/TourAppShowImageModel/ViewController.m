@@ -4,6 +4,8 @@
 #define KTabSelectedFontSize [UIFont systemFontOfSize:14];
 #define KTabUnSelectedFontSize [UIFont systemFontOfSize:16];
 #define KViewTop 20
+#define KImageCellImageListGap 10
+#define KNumberOfImagePerLine  3
 
 #define KTabViewButtonBeginTag 100
 #define KTabViewLabelBeginTag  200
@@ -11,13 +13,17 @@
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource>{
 
     //变量
-    NSArray *_tabItemArray;      //tab的集合数组(景点,美食,酒店,交通,购物,娱乐)
-    NSInteger _driverViewHeight; //设备view的高度
-    NSInteger _driverViewWidth;  //设备ivew的宽度
-    NSInteger _tabViewHeight;    //tab集合的高度
+    NSArray *_tabItemArray;       //tab的集合数组(景点,美食,酒店,交通,购物,娱乐)
+    NSInteger _driverViewHeight;  //设备view的高度
+    NSInteger _driverViewWidth;   //设备ivew的宽度
+    NSInteger _tabViewHeight;     //tab集合的高度
     NSInteger _tabItemLabelHeight; //tab选中label的高度
-    NSInteger _tabItemLableGapToView;  //tab选中label离view的边距
-    NSMutableArray *_imageListArray;    //获取的图片数据
+    NSInteger _tabItemLableGapToView;         //tab选中label离view的边距
+    NSInteger _imageCellHeight;               //cell的高度
+    NSInteger _imageCellImageListViewHeight;  //cell中imagelistView的高度
+    NSInteger _imageCellImageListViewWidth;   //cell中imagelistView的宽度
+    NSMutableArray *_imageListArray;          //获取的图片数据
+    
     
     //view
     UITableView *_imageTableView;//显示图片的tableView
@@ -38,6 +44,9 @@
 - (void)setupData{
     _tabItemArray=@[@"景点",@"美食",@"酒店",@"交通",@"购物",@"娱乐"];
     _imageListArray=[[NSMutableArray alloc] init];
+    _imageCellHeight=0;
+    _imageCellImageListViewHeight=0;
+    _imageCellImageListViewWidth=0;
     
     [ViewModelsBase getImageWithTagItemString:[_tabItemArray firstObject] returnBlock:^(NSArray *imageArray) {
         _imageListArray=[imageArray mutableCopy];
@@ -116,13 +125,18 @@
     if (_imageListArray &&_imageListArray.count>0) {
         _imageTableView.delegate=self;
         _imageTableView.dataSource=self;
+        _imageTableView.sectionFooterHeight=5;
+        _imageTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         //注册 tableCell
         UINib *imageMutLineNib = [UINib nibWithNibName:@"imageMutLineTableViewCell" bundle:nil];
         [_imageTableView registerNib:imageMutLineNib forCellReuseIdentifier:@"imageMutLineTableViewCell"];
         
-        UINib *imageSingleLineNib = [UINib nibWithNibName:@"imageSingleLineTableViewCell" bundle:nil];
-        [_imageTableView registerNib:imageSingleLineNib forCellReuseIdentifier:@"imageSingleLineTableViewCell"];
+        imageMutLineTableViewCell *imageCell=[_imageTableView dequeueReusableCellWithIdentifier:@"imageMutLineTableViewCell"];
+        _imageCellHeight=CGRectGetHeight(imageCell.frame);
+        _imageCellImageListViewHeight=CGRectGetHeight(imageCell.imageListView.frame);
+        _imageCellImageListViewWidth=CGRectGetWidth(imageCell.imageListView.frame);
+        
     }
 }
 
@@ -136,7 +150,6 @@
         //button
         ((UIButton*)[self.view viewWithTag:KTabViewButtonBeginTag+i]).titleLabel.font=KTabUnSelectedFontSize;
         [((UIButton*)[self.view viewWithTag:KTabViewButtonBeginTag+i ]) setTitleColor:KDefaultFontColor forState:UIControlStateNormal];
-        
         //label
         ((UILabel*)[self.view viewWithTag:KTabViewLabelBeginTag+i ]).backgroundColor=[UIColor clearColor];
     }
@@ -164,122 +177,70 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 1;
+    return 5;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return _imageListArray.count;
 }
 
-//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (tableView.tag==KLogTableViewTag) {
-//        ClassLog *cLogObject=[_logDataArray objectAtIndex:indexPath.row];
-//        
-//        TbCellLog*logCell;
-//        
-//        if (!logCell) {
-//            logCell=[tableView dequeueReusableCellWithIdentifier:@"TbCellLog"];
-//        }
-//        //TbCellLog*logCell=[tableView dequeueReusableCellWithIdentifier:@"TbCellLog"];
-//        logCell.cLogObject=cLogObject;
-//        logCell.btnEdit.tag=indexPath.row;
-//        [logCell.btnEdit addTarget:self action:@selector(didBtnEdit:) forControlEvents:UIControlEventTouchUpInside];
-//        [logCell initData];
-//        logCell.delegate=self;
-//        [logCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-//        return logCell;
-//    }else{
-//        //任务数据列表
-//        TbCellLogReceiveTask*taskCell=[tableView dequeueReusableCellWithIdentifier:@"TbCellLogReceiveTask"];
-//        //taskCell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
-//        ClassLog *cLogObject=[_taskDataArray objectAtIndex:indexPath.row];
-//        
-//        //判断任务是否已过期(超过一天)
-//        NSString *sTaskEndDate=cLogObject.sEndDate;
-//        NSTimeInterval timeBetween;
-//        if (cLogObject.isOntime) {
-//            NSDate *dTaskEndDate=[PublicFunc dateFromString:sTaskEndDate dateFormatterType:DateFromStringTypeYMD];
-//            timeBetween=[dTaskEndDate timeIntervalSinceNow];
-//        }
-//        timeBetween=-timeBetween;
-//        if (timeBetween>60*60*24) {
-//            taskCell.tbCellTaskTitleLabel.textColor=[UIColor redColor];
-//        }else{
-//            taskCell.tbCellTaskTitleLabel.textColor=[UIColor darkGrayColor];
-//        }
-//        
-//        taskCell.tbCellTaskTitleLabel.text=cLogObject.sPlanName;
-//        taskCell.tbCellTaskFinsihDateLabel.text=sTaskEndDate;
-//        taskCell.tbCellTaskPersentLabel.text=[NSString stringWithFormat:@"进度:%@",cLogObject.sProgress];
-//        return taskCell;
-//    }
-//}
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    imageMutLineTableViewCell *imageCell=[tableView dequeueReusableCellWithIdentifier:@"imageMutLineTableViewCell"];
+    imageCell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
+    //新除旧内容
+    imageCell.titleLabel.text=@"";
+    imageCell.numLabel.text=@"";
+    
+    for (UIView *subView in imageCell.imageListView.subviews) {
+        [subView removeFromSuperview];
+    }
+    
+    //标题
+    NSString *titleSting=[[_imageListArray objectAtIndex:indexPath.section] objectForKey:@"title"];
+    imageCell.titleLabel.text=titleSting;
+    //页数
+    NSArray *imageArray=[[_imageListArray objectAtIndex:indexPath.section] objectForKey:@"image"];
+    imageCell.numLabel.text=[NSString stringWithFormat:@"共%lu页",(unsigned long)imageArray.count];
+    //图片
+    //计算每个图片的宽度
+    NSInteger imageWidth=(_imageCellImageListViewWidth-(KNumberOfImagePerLine-1)*KImageCellImageListGap)/KNumberOfImagePerLine;
+    NSInteger curOriginX=0;
+    NSInteger curOriginY=0;
+    NSString *imageNameString;//图片名称
+    
+    for (int i=0; i<=imageArray.count-1; i++) {
+        curOriginX= i % KNumberOfImagePerLine;
+        curOriginY= (i / KNumberOfImagePerLine)%(KNumberOfImagePerLine-1);
+        
+        UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(curOriginX*(imageWidth+KImageCellImageListGap), curOriginY*(_imageCellImageListViewHeight+KImageCellImageListGap), imageWidth, _imageCellImageListViewHeight)];
+        imageNameString=[imageArray objectAtIndex:i];
+        imageView.image=[UIImage imageNamed:imageNameString];
+        [imageCell.imageListView addSubview:imageView];
+    }
+    
+    return imageCell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        ViewControllerImageBrowse *imageBrowseViewController=[self.storyboard instantiateViewControllerWithIdentifier:@"ViewControllerImageBrowse"];
+        imageBrowseViewController.imageNameArray=[[_imageListArray objectAtIndex:indexPath.section] objectForKey:@"image"];
+        [self presentViewController:imageBrowseViewController animated:YES completion:nil];
+    });
+}
 
-//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (tableView.tag==KLogTableViewTag) {
-//        NSInteger cellRowHeight=0;
-//        NSInteger detailControlHeight=30;
-//        NSInteger lineHeight=2;
-//        NSInteger logTbCellDetailViewWidth;
-//        
-//        ClassLog *cLogObject=[_logDataArray objectAtIndex:indexPath.row];
-//        //只创建一个cell用作测量高度
-//        static TbCellLog *logCell = nil;
-//        if (!logCell)
-//            logCell = [_logTableView dequeueReusableCellWithIdentifier:@"TbCellLog"];
-//        logTbCellDetailViewWidth=CGRectGetWidth(logCell.logTbCellDetailView.frame);
-//        
-//        if (cLogObject.isLogExist || [cLogObject.sLogState integerValue]==LogStateTypeFinished) {
-//            //日志内容
-//            if (cLogObject.sLogContent) {
-//                //标题高度
-//                cellRowHeight=cellRowHeight+detailControlHeight;
-//                //分隔线
-//                cellRowHeight=cellRowHeight+lineHeight;
-//                //内容高度
-//                NSString *sLogContent=[cLogObject.sLogContent stringByReplacingOccurrencesOfString:@"<br>" withString:@"\r\n"];
-//                cellRowHeight=cellRowHeight+[PublicFunc heightForString:sLogContent font:[UIFont systemFontOfSize:15] andWidth:logTbCellDetailViewWidth];
-//            }
-//            //上传文件内容
-//            if (cLogObject.arrayAccessory) {
-//                NSMutableArray *arrayAccessory=[[cLogObject.arrayAccessory copy] objectForKey:@"Result"];
-//                if (arrayAccessory.count>0){
-//                    //标题高度
-//                    cellRowHeight=cellRowHeight+detailControlHeight;
-//                    //分隔线
-//                    cellRowHeight=cellRowHeight+lineHeight;
-//                    //内容
-//                    cellRowHeight=cellRowHeight+arrayAccessory.count*detailControlHeight;
-//                }
-//            }
-//            //点评内容
-//            if (cLogObject.sEvaluationItemInfo && cLogObject.sEvaluationItemInfo.length>0) {
-//                //标题高度
-//                cellRowHeight=cellRowHeight+detailControlHeight;
-//                //分隔线
-//                cellRowHeight=cellRowHeight+lineHeight;
-//                //内容
-//                NSString *sEvaluationItemInfo=[cLogObject.sEvaluationItemInfo stringByReplacingOccurrencesOfString:@"<br>" withString:@"\r\n"];
-//                cellRowHeight=cellRowHeight+[PublicFunc heightForString:sEvaluationItemInfo font:[UIFont systemFontOfSize:15] andWidth:logTbCellDetailViewWidth];
-//            }
-//            if (cellRowHeight<=CGRectGetHeight(logCell.logTbCellDetailView.frame)) {
-//                cellRowHeight=_fLogRowCellH;
-//            }else{
-//                cellRowHeight=cellRowHeight+(_fLogRowCellH-CGRectGetHeight(logCell.logTbCellDetailView.frame));
-//            }
-//        }else{
-//            cellRowHeight=_fLogRowCellH;
-//        }
-//        return cellRowHeight;
-//    }else{
-//        return _fTaskRowCellH;
-//    }
-//}
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *imageArray=[[_imageListArray objectAtIndex:indexPath.section] objectForKey:@"image"];
+    
+    if (imageArray.count>3) {
+        //超过三张图片就换两行
+        return _imageCellHeight+_imageCellImageListViewHeight+KImageCellImageListGap;
+    }else{
+        return _imageCellHeight;
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
