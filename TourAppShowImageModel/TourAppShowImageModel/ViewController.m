@@ -4,7 +4,7 @@
 #define KTabSelectedFontSize [UIFont systemFontOfSize:14];
 #define KTabUnSelectedFontSize [UIFont systemFontOfSize:16];
 #define KViewTop 20
-#define KImageCellImageListGap 10
+#define KImageCellImageListSpace 10
 #define KNumberOfImagePerLine  3
 
 #define KTabViewButtonBeginTag 100
@@ -135,7 +135,7 @@
         imageMutLineTableViewCell *imageCell=[_imageTableView dequeueReusableCellWithIdentifier:@"imageMutLineTableViewCell"];
         _imageCellHeight=CGRectGetHeight(imageCell.frame);
         _imageCellImageListViewHeight=CGRectGetHeight(imageCell.imageListView.frame);
-        _imageCellImageListViewWidth=CGRectGetWidth(imageCell.imageListView.frame);
+        _imageCellImageListViewWidth=_driverViewWidth-imageCell.mainViewLeadingLayoutConstraint.constant-imageCell.mainViewTrailingLayoutConstraint.constant;
         
     }
 }
@@ -205,7 +205,7 @@
     imageCell.numLabel.text=[NSString stringWithFormat:@"共%lu页",(unsigned long)imageArray.count];
     //图片
     //计算每个图片的宽度
-    NSInteger imageWidth=(_imageCellImageListViewWidth-(KNumberOfImagePerLine-1)*KImageCellImageListGap)/KNumberOfImagePerLine;
+    NSInteger imageWidth=(_imageCellImageListViewWidth-(KNumberOfImagePerLine-1)*KImageCellImageListSpace)/KNumberOfImagePerLine;
     NSInteger curOriginX=0;
     NSInteger curOriginY=0;
     NSString *imageNameString;//图片名称
@@ -214,7 +214,7 @@
         curOriginX= i % KNumberOfImagePerLine;
         curOriginY= (i / KNumberOfImagePerLine)%(KNumberOfImagePerLine-1);
         
-        UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(curOriginX*(imageWidth+KImageCellImageListGap), curOriginY*(_imageCellImageListViewHeight+KImageCellImageListGap), imageWidth, _imageCellImageListViewHeight)];
+        UIImageView *imageView=[[UIImageView alloc] initWithFrame:CGRectMake(curOriginX*(imageWidth+KImageCellImageListSpace), curOriginY*(_imageCellImageListViewHeight+KImageCellImageListSpace), imageWidth, _imageCellImageListViewHeight)];
         imageNameString=[imageArray objectAtIndex:i];
         imageView.image=[UIImage imageNamed:imageNameString];
         [imageCell.imageListView addSubview:imageView];
@@ -236,7 +236,7 @@
     
     if (imageArray.count>3) {
         //超过三张图片就换两行
-        return _imageCellHeight+_imageCellImageListViewHeight+KImageCellImageListGap;
+        return _imageCellHeight+_imageCellImageListViewHeight+KImageCellImageListSpace;
     }else{
         return _imageCellHeight;
     }

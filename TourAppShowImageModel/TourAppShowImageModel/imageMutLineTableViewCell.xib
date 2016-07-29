@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUv-96-XeN" userLabel="titleView">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyW-gc-vym" userLabel="titleLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VyW-gc-vym" userLabel="titleLabel">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -62,14 +62,16 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="LV6-RN-kiP" secondAttribute="trailing" constant="10" id="4H4-FX-iLN"/>
-                    <constraint firstItem="LV6-RN-kiP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="A9b-ij-x6b"/>
+                    <constraint firstAttribute="trailing" secondItem="LV6-RN-kiP" secondAttribute="trailing" constant="10" id="4H4-FX-iLN" userLabel="mainViewTrailingLayoutConstraint"/>
+                    <constraint firstItem="LV6-RN-kiP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="A9b-ij-x6b" userLabel="mainViewLeadingLayoutConstraint"/>
                     <constraint firstItem="LV6-RN-kiP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="BYV-jF-Q9U"/>
                     <constraint firstAttribute="bottom" secondItem="LV6-RN-kiP" secondAttribute="bottom" constant="10" id="bvb-dK-LLW"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="imageListView" destination="zD2-VD-iw5" id="QMj-PW-dUm"/>
+                <outlet property="mainViewLeadingLayoutConstraint" destination="A9b-ij-x6b" id="8Gl-Oe-P1I"/>
+                <outlet property="mainViewTrailingLayoutConstraint" destination="4H4-FX-iLN" id="XBT-qg-Huq"/>
                 <outlet property="numLabel" destination="iY2-Ry-kjR" id="yC0-rr-GRo"/>
                 <outlet property="titleLabel" destination="VyW-gc-vym" id="zlW-uw-fj8"/>
             </connections>

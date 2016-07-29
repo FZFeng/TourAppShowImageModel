@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "182D5C371D49DB3E00E51781"
-               BuildableName = "TourAppShowImageModel.app"
+               BuildableName = "TourApp.app"
                BlueprintName = "TourAppShowImageModel"
                ReferencedContainer = "container:TourAppShowImageModel.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "182D5C371D49DB3E00E51781"
-            BuildableName = "TourAppShowImageModel.app"
+            BuildableName = "TourApp.app"
             BlueprintName = "TourAppShowImageModel"
             ReferencedContainer = "container:TourAppShowImageModel.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "182D5C371D49DB3E00E51781"
-            BuildableName = "TourAppShowImageModel.app"
+            BuildableName = "TourApp.app"
             BlueprintName = "TourAppShowImageModel"
             ReferencedContainer = "container:TourAppShowImageModel.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "182D5C371D49DB3E00E51781"
-            BuildableName = "TourAppShowImageModel.app"
+            BuildableName = "TourApp.app"
             BlueprintName = "TourAppShowImageModel"
             ReferencedContainer = "container:TourAppShowImageModel.xcodeproj">
          </BuildableReference>

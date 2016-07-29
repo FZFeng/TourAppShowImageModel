@@ -17,7 +17,7 @@
 
     // @"景点",@"美食",@"酒店",@"交通",@"购物",@"娱乐"
     /*
-    //读取本地json数据 并返回
+    //读取本地数据 并返回
     NSData *fileData;
     NSString *sandBoxPathString;
     NSDictionary *imageDataDictionary;

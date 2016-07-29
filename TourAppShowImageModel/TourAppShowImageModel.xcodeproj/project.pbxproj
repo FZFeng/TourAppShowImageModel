@@ -435,12 +435,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/TourAppShowImageModel/PrefixHeader.pch";
 				INFOPLIST_FILE = TourAppShowImageModel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "fabius-s-studio.TourAppShowImageModel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fabius.TourAppShowImageModel;
+				PRODUCT_NAME = TourApp;
+				PROVISIONING_PROFILE = "afe2d32b-6a79-468a-87c9-267d6540c137";
 			};
 			name = Debug;
 		};
@@ -448,12 +452,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/TourAppShowImageModel/PrefixHeader.pch";
 				INFOPLIST_FILE = TourAppShowImageModel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "fabius-s-studio.TourAppShowImageModel";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.fabius.TourAppShowImageModel;
+				PRODUCT_NAME = TourApp;
+				PROVISIONING_PROFILE = "afe2d32b-6a79-468a-87c9-267d6540c137";
 			};
 			name = Release;
 		};

@@ -31,6 +31,7 @@
                         <viewControllerLayoutGuide type="bottom" id="YpW-ai-cNt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mB1-ZB-aIn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inJ-ck-5mi" userLabel="imageListScroll">
@@ -108,15 +109,15 @@
                                 <exclude reference="xQJ-Mb-9Z2"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="3UI-kF-s1x"/>
-                                <exclude reference="Fp3-mn-uDf"/>
-                                <exclude reference="u7O-vs-YeD"/>
+                                <exclude reference="5iP-AC-fYM"/>
                                 <exclude reference="Hnh-hv-fx3"/>
                                 <exclude reference="P6I-3P-VTP"/>
                                 <exclude reference="gsU-LI-rCR"/>
                                 <exclude reference="NUD-sk-R07"/>
                                 <exclude reference="fmN-gD-kBV"/>
-                                <exclude reference="5iP-AC-fYM"/>
+                                <exclude reference="3UI-kF-s1x"/>
+                                <exclude reference="Fp3-mn-uDf"/>
+                                <exclude reference="u7O-vs-YeD"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -126,15 +127,15 @@
                                 <include reference="xQJ-Mb-9Z2"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3UI-kF-s1x"/>
-                                <include reference="Fp3-mn-uDf"/>
-                                <include reference="u7O-vs-YeD"/>
+                                <include reference="5iP-AC-fYM"/>
                                 <include reference="Hnh-hv-fx3"/>
                                 <include reference="P6I-3P-VTP"/>
                                 <include reference="gsU-LI-rCR"/>
                                 <include reference="NUD-sk-R07"/>
                                 <include reference="fmN-gD-kBV"/>
-                                <include reference="5iP-AC-fYM"/>
+                                <include reference="3UI-kF-s1x"/>
+                                <include reference="Fp3-mn-uDf"/>
+                                <include reference="u7O-vs-YeD"/>
                             </mask>
                         </variation>
                     </view>

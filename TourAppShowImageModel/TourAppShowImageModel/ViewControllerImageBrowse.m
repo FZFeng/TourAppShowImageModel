@@ -40,7 +40,7 @@
     _imageListScroll.showsVerticalScrollIndicator=NO;
     _imageListPage.numberOfPages=self.imageNameArray.count;
     
-    _imageListPageIndexLabel.text=[NSString stringWithFormat:@"1/%d",self.imageNameArray.count];
+    _imageListPageIndexLabel.text=[NSString stringWithFormat:@"1/%lu",(unsigned long)self.imageNameArray.count];
     
     //添加关闭窗体button
     UIButton *btnClose=[UIButton buttonWithType:UIButtonTypeCustom];
@@ -77,7 +77,7 @@
     NSInteger curImagePageIndex=scrollView.contentOffset.x/_imageListScrolWidth;
     [_imageListPage setCurrentPage:curImagePageIndex];
     //当前页
-    _imageListPageIndexLabel.text=[NSString stringWithFormat:@"%d/%d",curImagePageIndex+1,self.imageNameArray.count];
+    _imageListPageIndexLabel.text=[NSString stringWithFormat:@"%ld/%lu",curImagePageIndex+1,(unsigned long)self.imageNameArray.count];
     
 }
 
